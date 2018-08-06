@@ -1,9 +1,10 @@
 # BlockchainJS
 	Demo blockchain for studies purposes.
 
-# The application has 2 modules, a Parent node that stores the full blockchain, including the transactions and merkle tree, as well as it cappable of mining new blocks, and a Child node that only stores a chain of s block headers, and can only validate transactions (SPV equivalent).
+# Purposes
+The application has 2 modules, a Parent node that stores the full blockchain, including the transactions and merkle tree, as well as it cappable of mining new blocks, and a Child node that only stores a chain of s block headers, and can only validate transactions (SPV equivalent).
 
-#Installation
+# Installation
 Go inside Parent node directory and run:
 node install
 node run
