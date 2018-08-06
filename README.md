@@ -1,12 +1,14 @@
 # BlockchainJS
-	Demo blockchain for studies purposes.
+Demo blockchain for studies purposes.
 
 # Purposes
 The application has 2 modules, a Parent node that stores the full blockchain, including the transactions and merkle tree, as well as it cappable of mining new blocks, and a Child node that only stores a chain of s block headers, and can only validate transactions (SPV equivalent).
 
 # Installation
 Go inside Parent node directory and run:
+
 node install
+
 node run
 
 Access Control Panel with localhost:5000, there you can tell the node to mine block, check balance for each address, send transactions between addresses (Note that few blocks should be mined first so that 'Sammy' address will have some coins from mining rewards.
@@ -23,7 +25,9 @@ localhost:3000/peers		 	-- Shows all the connected peers
 
 
 For the Child Node, go inside Child node directory and run:
+
 npm install
+
 HTTP_PORT=3002 npm start
 
 It is possible to run any amount of client, just each must have unique HTTP_PORT number
