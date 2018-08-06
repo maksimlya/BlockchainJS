@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Blockchain</title>
+
+</head>
+
+<body>
+	<form method="post" action="http://localhost:3000/addTransaction" target="hiddenFrame">
+	From:
+	<select name="from">
+  <option value="Sammy">Sammy</option>
+  <option value="Momo">Momo</option>
+  <option value="Popo">Popo</option>
+  <option value="Koko">Koko</option>
+</select>
+To:
+<select name="to">
+  <option value="Sammy">Sammy</option>
+  <option value="Momo">Momo</option>
+  <option value="Popo">Popo</option>
+  <option value="Koko">Koko</option>
+</select>
+Amount:
+ <select name="amount">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+   <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+   <option value="9">9</option>
+  <option value="10">10</option>
+</select>
+<input type="text" name="privateKey" value='Sender&apos;s private key' >
+<br><br>
+<input type="submit" value = "Send">
+</form>
+<br><br><br><br><br><br>
+<form method="post" action="http://localhost:3000/mineBlock" target="hiddenFrame">
+  <input type="submit" value="MineBlock">
+</form>
+
+<br><br><br><br><br>
+<form method="post" action="http://localhost:3000/checkBalance" target="hiddenFrame">
+Check Balance:
+  <select name="check">
+  <option value="Sammy">Sammy</option>
+  <option value="Momo">Momo</option>
+  <option value="Popo">Popo</option>
+  <option value="Koko">Koko</option>
+</select>
+<input type="submit" value = "Check">
+</form>
+
+<style>
+  .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+</style>
+<iframe name="hiddenFrame" class="hide"></iframe>
+  <script src="js/script.js"></script>
+</body>
+</html>
