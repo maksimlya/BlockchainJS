@@ -13,9 +13,10 @@ Access Control Panel with localhost:5000, there you can tell the node to mine bl
 
 The blockchain data can be accessed through those lines in explorer:
 
-localhost:3000/blocks
-localhost:3000/transactions
-localhost:3000/peers
+localhost:3000/blocks            	-- Shows all the blocks in the system
+localhost:3000/transactions	 	-- Shows all the completed transactions in the system
+localhost:3000/pendingTransactions	-- Shows all the pending transactions in the system
+localhost:3000/peers		 	-- Shows all the connected peers
 
 
 For the Child Node, go inside Child node directory and run:
