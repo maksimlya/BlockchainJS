@@ -35,6 +35,7 @@ it will show all the synchronized blocks with the main node, but just the header
 The application has 4 initial users, each one is associated within his public/private keys:
 
 Sammy:
+
 private:
 18c99d687362ba6ebd41eb50cafc81838b200971392b9ec9c158a7eebfae9622
 public:
