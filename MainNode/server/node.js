@@ -1,6 +1,8 @@
 var Blockchain = require('./blockchain');                // Uses our Blockchain module
+var Block = require('./block');
+var BlockHeader = require('./blockHeader')
 var Transaction = require('./transaction');				// Uses our Transaction model
-
+var fs = require('fs');
 let elliptic = require('elliptic');						// Uses elliptic npm model ( for signing and validating transactions and blocks ())
 let ec = new elliptic.ec('secp256k1');					// Tell elliptic to use ECDSA security mode ( same mode used by bitcoin's blockchain)
 
@@ -36,6 +38,55 @@ var MessageType = {															// Message type used for communication with ot
     QUERY_ALL: 1,			// Show all blocks
     RESPONSE_BLOCKCHAIN: 2	// Get whole blockchain (used when peer connects to node that has many blocks, it asks the parent node for whole blockchain)
 };
+
+
+var readLocalBlocks = () => {															// This function will read the local blocks from the files, check them,
+	if(fs.existsSync('blocks/indexes')){												// and add them to the chain if they pass the validation test.
+	var genesisBlockHash = fs.readFileSync('blocks/block0hash');						
+	console.log(genesisBlockHash.toString());											// Initial genesis block hash is same for any chain in this system...
+	var validChainLength = 0;
+	var text = fs.readFileSync("blocks/indexes");										// Store block indexes in a separate file so we'd know how many blocks to read.
+	var indexes = text.toString().split(' ');											
+	var isStillValid = true;					// Keep an eye to check the chain after every added block.
+	for(var idx of indexes){											// Run through every block index.
+		if(idx != '' && isStillValid){									// Loop as long as chain still valid.
+		var data = fs.readFileSync("blocks/block"+idx);					
+		var result = JSON.parse(data);									// Parse block data from JSON
+		var block = new Block(result.blockHeader.timestamp,result.blockHeader.merkleRoot,result.blockHeader.previousHash);		
+		block.blockHeader.nonce = result.blockHeader.nonce;
+		block.blockHeader.hash = result.blockHeader.hash;
+		block.transactions = result.transactions;
+		block.merkleTree = result.merkleTree;
+		block.signature = result.signature;								// Still parsing....
+
+		myBlockchain.chain.push(block);									// Add the temp block to our blockchain, and send it to validation.
+		if(myBlockchain.isChainValid(myBlockchain.chain)){									
+			console.log("Block n` " + idx + ' appears to be valid, adding to blockchain');		// If blockchain still valid, we'll keep the block in.
+			validChainLength++;
+		}
+		else {
+		console.log("Block n` " + idx + ' got compromised, removing rest of the chain...');			// Block data has changed, throw the block and rest of the blockchain away
+		isStillValid = false; 																			// TODO - as in a real blockchain, the node will ask neighboor node for valid copy of the block
+		fs.unlinkSync("blocks/block"+idx);
+		myBlockchain.chain.pop(block);					
+		BlockHeader.prototype.reduceId.call();    // Reduce the bad id and keep building blockchain on top of the good one
+	}} else{
+		if(idx != '')
+			fs.unlinkSync("blocks/block"+idx);
+	}
+
+}
+fs.unlinkSync("blocks/indexes");
+for(var i = 0 ; i < validChainLength ; i ++){
+	fs.appendFileSync('blocks/indexes',(i+1) +' ',function(err,data){						// Store the block files in /blocks directory
+			if (err) console.log(err);
+		});
+}
+
+}
+
+	
+}
 
 var initHttpServer = () => {								// Standart express operations
     var app = express();
@@ -190,6 +241,6 @@ var handleBlockchainResponse = (message) => {																				// Another func
 
 
 
-
+readLocalBlocks();
 initHttpServer();									// Start Http server.
 initP2PServer();									// Start p2p server.

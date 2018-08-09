@@ -1,5 +1,6 @@
 var Blockchain = require('./blockchain');
 var Transaction = require('./transaction');
+var fs = require('fs');
 
 let elliptic = require('elliptic');
 let ec = new elliptic.ec('secp256k1');
@@ -23,6 +24,8 @@ var MessageType = {
     QUERY_ALL: 1,
     RESPONSE_BLOCKCHAIN: 2
 };
+
+
 
 var initHttpServer = () => {
     var app = express();
@@ -130,6 +133,13 @@ var replaceChain = (newBlocks) => {
     if (myBlockchain.isChainValid(newBlocks)) {
         console.log('Received blockchain is valid. Replacing current blockchain with received blockchain');
         myBlockchain.chain = newBlocks;
+        for(var block of myBlockchain.chain){
+        	var bdata = JSON.stringify(block,null,2);
+        	fs.writeFile('blocks/block' + block.id,bdata,function(err,data){
+        		if (err) console.log(err);
+    	console.log("Successfully Written to File.");
+    });
+        }
         broadcast(responseLatestMsg());
     } else {
         console.log('Received blockchain invalid');

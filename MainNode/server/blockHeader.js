@@ -1,6 +1,7 @@
 const  SHA256 = require('crypto-js/sha256');
 var id = 0;
 class BlockHeader{
+
 	constructor(timestamp, merkleRoot, previousHash = ''){
 		this.id = id++;
 		this.timestamp = timestamp;
@@ -9,10 +10,14 @@ class BlockHeader{
 		this.hash = this.calculateHash();
 		this.nonce = 0;
 	}
-
+	
 	calculateHash(){
 		return SHA256(this.id + this.previousHash + this.timestamp + this.merkleRoot + this.nonce).toString();
 
+	}
+
+	reduceId(){
+		id--;
 	}
 	
 };

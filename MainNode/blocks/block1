@@ -1,0 +1,17 @@
+{
+  "blockHeader": {
+    "id": 1,
+    "timestamp": 1533847123037,
+    "merkleRoot": "bb6f4e59772f9973b6419f91ea295b57254e546034597d06e2172b7f083d4cc9",
+    "previousHash": "30f79b7500b0c0e190b285958723cda3e89bf1eb5d8cf03c1bc55688d8edf426",
+    "hash": "00003a4098681f947d9766601b9a3a9ac26397729b91f1e0b0b6d3aa0dbcd2ce",
+    "nonce": 8608
+  },
+  "transactions": [],
+  "merkleTree": {},
+  "signature": {
+    "r": "e2fba1ae4fb788400c57113b9b31723665c9bf7f42fa0296f79627532eb1765",
+    "s": "541a983588f36f6b1844162173dc3c6e448b3ad07d84b326a9bb899acedbec79",
+    "recoveryParam": 1
+  }
+}

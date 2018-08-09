@@ -1,0 +1,34 @@
+{
+  "blockHeader": {
+    "id": 3,
+    "timestamp": 1533847123536,
+    "merkleRoot": "221fdc60737f8d704018a95beeb60fc18a3be978292db4d804ae3f5a9ee035e9",
+    "previousHash": "00009fa195e65f14becab48d7df93689e358340efbf1fc0436a3a20561cb0c5d",
+    "hash": "00005d1414cfb8f3d4b9a0716b25dcdc5948c7780a4a66e4456e0fe9e071bdb3",
+    "nonce": 87208
+  },
+  "transactions": [
+    {
+      "timestamp": 1533847123515,
+      "fromAddress": "Blockchain",
+      "toAddress": "Sammy",
+      "amount": 10,
+      "publicKey": [
+        "7b83ad6afb1209f3c82ebeb08c0c5fa9bf6724548506f2fb4f991e2287a77090",
+        "177316ca82b0bdf70cd9dee145c3002c0da1d92626449875972a27807b73b42e"
+      ],
+      "signature": {
+        "r": "b4bf4caff2e698d0b9f996bd7789332e643bf4e80423807b3c4b5c2aed5bec0",
+        "s": "151de6a8e3b596d61bd1f3df268561ec311df96aebe0c02fb813f981344c125b",
+        "recoveryParam": 0
+      },
+      "merkleRoot": "221fdc60737f8d704018a95beeb60fc18a3be978292db4d804ae3f5a9ee035e9"
+    }
+  ],
+  "merkleTree": {},
+  "signature": {
+    "r": "fa64c6e2628a927792b8c60b9e1382b00843025b3ac22fe78a13a7332a1e57f",
+    "s": "10a32ce7d7dc88e2e989db7f81505838074e9ab7b6096ef566541e46c58d2f05",
+    "recoveryParam": 0
+  }
+}

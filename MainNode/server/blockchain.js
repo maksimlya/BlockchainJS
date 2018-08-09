@@ -1,5 +1,6 @@
 const Transaction = require('./transaction');		// Uses our Transaction class
 const Block = require('./block');					// Uses our Block class
+const BlockHeader = require('./blockHeader');
 const merkle = require('merkle');					// Uses merkle node module to handle operations with merkle tree
 const  SHA256 = require('crypto-js/sha256');		// Uses crypto-js sha256 module to handle hash functions.
 let elliptic = require('elliptic');					// Uses elliptic npm model ( for signing and validating transactions and blocks ())
@@ -152,17 +153,21 @@ class Blockchain{
 
 	isChainValid(chain){													// This function checks that the blockchain is valid (Used in real-world blockchains to check that no changes were made to any of the blocks)
 		for(let i = 1; i < chain.length; i++){								// If any of the data within the blocks was compromised, the blockchain will be rejected and thrown away, while another copy of it will be provided by neighbor node.
-			var currentBlock  = chain[i] = typeOf(Block);
+			var currentBlock  = chain[i];
 			const previousBlock = chain[i-1];
-
-			if(currentBlock.hash !== Block.prototype.calculateHash.call(currentBlock)){			// Check if any given block's hash is valid (If any of the data changes, block's hash will be changed as well and the block will be rejected and replaced)
+		 	var checkHash = SHA256(currentBlock.blockHeader.id + currentBlock.blockHeader.previousHash + currentBlock.blockHeader.timestamp + currentBlock.blockHeader.merkleRoot + currentBlock.blockHeader.nonce).toString();
+			
+			if(currentBlock.blockHeader.hash !== checkHash){			// Check if any given block's hash is valid (If any of the data changes, block's hash will be changed as well and the block will be rejected and replaced)
 				return false;
 			}
 
-			if(currentBlock.previousHash !== previousBlock.hash){								// CHecks that every block contains correct previous block's hash
+			if(currentBlock.blockHeader.previousHash !== previousBlock.blockHeader.hash){								// CHecks that every block contains correct previous block's hash
 				return false;
 			}
 
+
+
+			
 			
 		}
 		return true;
